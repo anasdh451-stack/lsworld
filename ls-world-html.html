@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LS World - The Future of Roleplay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="ls-world-css.css">
+</head>
+<body>
+ <!-- Navigation -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <a href="#home">
+                <img src="https://i.ibb.co/S40RrhKq/logo.webp" alt="LS World Logo">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#community">Community</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="mobile-menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">LS WORLD</h1>
+            <p class="hero-subtitle">The Future of Roleplay</p>
+            <a href="#contact" class="cta-button">Join Now</a>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+   <!-- Features Section -->
+<section class="features" id="features">
+    <div class="features-container">
+        <p class="section-title">TOP FEATURES</p>
+        <h2 class="section-main-title">Custom furniture, exclusive<br>business system <span style="color: var(--light-gray);">and more</span></h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-background business-bg"></div>
+                <div class="feature-content">
+                    <h3 class="feature-title">15+ TYPES OF BUSINESSES</h3>
+                    <p class="feature-description">Creating A Business Is Fast & Easy</p>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-background faction-bg"></div>
+                <div class="feature-content">
+                    <h3 class="feature-title">30+ ACTIVE FACTIONS</h3>
+                    <p class="feature-description">Join A Faction And Explore RP Opportunities</p>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-background hangout-bg"></div>
+                <div class="feature-content">
+                    <h3 class="feature-title">50+ HANGOUT SPOTS</h3>
+                    <p class="feature-description">There Is Always Something To Do</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-logo">LS WORLD</div>
+            <p class="footer-text">Join the most immersive roleplay experience. Your story starts here.</p>
+            <a href="#" class="cta-button">Connect Now</a>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background opacity on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+            });
+        });
+
+        // Feature cards intersection observer for staggered animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Initialize feature cards animation
+        document.querySelectorAll('.feature-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = `all 0.6s ease ${index * 0.2}s`;
+            observer.observe(card);
+        });
+
+        // Add loading animation to page
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.5;
+            
+            if (hero) {
+                hero.style.backgroundPosition = `center ${rate}px`;
+            }
+        });
+    </script>
+</body>
+</html>
